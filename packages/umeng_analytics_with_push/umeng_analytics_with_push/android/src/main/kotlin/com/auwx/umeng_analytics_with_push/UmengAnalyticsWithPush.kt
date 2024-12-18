@@ -107,6 +107,10 @@ object UmengAnalyticsWithPush {
         UMConfigure.init(context, deviceType ?: UMConfigure.DEVICE_TYPE_PHONE, umengSecret)
         MobclickAgent.setPageCollectionMode(MobclickAgent.PageMode.AUTO)
 
+        // https://community.umeng.com/topic/view/66f5432f9f31b619b420a423
+        // 关闭安装卸载分析功能，解决 Vivo 上架隐私问题
+        PushAgent.getInstance(context).setPackageListenerEnable(false)
+
         PushAgent.getInstance(context).register(mRegisterCallback)
         if (UMUtils.isMainProgress(context)) {
             registerDevice(context)
